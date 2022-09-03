@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
-import shops from '../shops';
-
-const ShopScreen = ({ match }) => {
+import { Row, Col, Image, ListGroup } from 'react-bootstrap';
+import axios from 'axios';
+const ShopScreen = () => {
   const { id } = useParams();
-  const shop = shops.find((s) => s._id === id);
+  const [shop, setShop] = useState({});
 
+  useEffect(() => {
+    const fetchShop = async () => {
+      const { data } = await axios.get(`/api/shops/${id}`);
+
+      setShop(data);
+    };
+
+    fetchShop();
+  }, [id]);
   return (
     <>
       <Link className='btn btn-light my-3' to='/'>

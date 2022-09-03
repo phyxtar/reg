@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import shops from '../shops';
 import Shop from '../components/Shop';
+import axios from 'axios';
 
 const HomeScreen = () => {
+  const [shops, setShops] = useState([]);
+
+  useEffect(() => {
+    const fetchShops = async () => {
+      const { data } = await axios.get('/api/shops');
+
+      setShops(data);
+    };
+
+    fetchShops();
+  }, []);
+
   return (
     <>
       <h1>Registered Shops</h1>
