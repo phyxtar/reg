@@ -1,0 +1,58 @@
+const shops = [
+  {
+    _id: '1',
+    name: 'Local Shop 1',
+    image: '/images/shop.png',
+    owner: 'Jhon Doe',
+    email: 'jhon@example.com',
+    address: 'Jamshedur, Jharkhand',
+    category: 'Electronics',
+  },
+  {
+    _id: '2',
+    name: 'Local Shop 2',
+    image: '/images/shop.png',
+    owner: 'Jhon Doe',
+    email: 'jhon@example.com',
+    address: 'Jamshedur, Jharkhand',
+    category: 'Electronics',
+  },
+  {
+    _id: '3',
+    name: 'Local Shop 3',
+    image: '/images/shop.png',
+    owner: 'Jhon Doe',
+    email: 'jhon@example.com',
+    address: 'Jamshedur, Jharkhand',
+    category: 'Electronics',
+  },
+  {
+    _id: '4',
+    name: 'Local Shop 4',
+    image: '/images/shop.png',
+    owner: 'Jhon Doe',
+    email: 'jhon@example.com',
+    address: 'Jamshedur, Jharkhand',
+    category: 'Electronics',
+  },
+  {
+    _id: '5',
+    name: 'Local Shop 5',
+    image: '/images/shop.png',
+    owner: 'Jhon Doe',
+    email: 'jhon@example.com',
+    address: 'Jamshedur, Jharkhand',
+    category: 'Electronics',
+  },
+  {
+    _id: '6',
+    name: 'Local Shop 6',
+    image: '/images/shop.png',
+    owner: 'Jhon Doe',
+    email: 'jhon@example.com',
+    address: 'Jamshedur, Jharkhand',
+    category: 'Electronics',
+  },
+];
+
+export default shops;
