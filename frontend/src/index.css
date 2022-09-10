@@ -23,5 +23,22 @@ a {
   justify-content: end;
 }
 nav.navbar.navbar-expand-lg.navbar-light.bg-custom {
+  background-color: #eceaef;
+}
+
+.nav-link {
+  color: black !important;
+}
+
+.email-text {
+  color: red;
+  text-decoration: none;
+}
+
+.email-text:hover {
+  color: blue;
+}
+footer {
   background-color: rebeccapurple;
+  color: white;
 }
