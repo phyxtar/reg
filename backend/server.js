@@ -6,6 +6,10 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 import shopRoutes from './routes/shopRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+import uploadRoutes2 from './routes/uploadRoutes2.js';
+import uploadRoutes3 from './routes/uploadRoutes3.js';
+import uploadRoutes4 from './routes/uploadRoutes4.js';
+import uploadRoutes5 from './routes/uploadRoutes5.js';
 
 dotenv.config();
 
@@ -22,6 +26,10 @@ app.use(express.json());
 app.use('/api/shops', shopRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/upload2', uploadRoutes2);
+app.use('/api/upload3', uploadRoutes3);
+app.use('/api/upload4', uploadRoutes4);
+app.use('/api/upload5', uploadRoutes5);
 
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));

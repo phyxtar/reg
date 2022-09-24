@@ -9,11 +9,11 @@ import {
 } from '../controllers/shopController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
-router.route('/').get(getShops).post(protect, admin, createShop);
+router.route('/').get(getShops).post(protect, createShop);
 router
   .route('/:id')
   .get(getShopById)
   .delete(protect, admin, deleteShop)
-  .put(protect, admin, updateShop);
+  .put(protect, updateShop);
 
 export default router;

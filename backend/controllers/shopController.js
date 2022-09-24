@@ -40,6 +40,10 @@ const createShop = asyncHandler(async (req, res) => {
     address: 'Jamshedur, Jharkhand',
     owner_name: 'Owner Name',
     owner_mobile: 1234567890,
+    trade_lic: 'images/sample2.jpg',
+    MISE_certificates: 'images/sample3.jpg',
+    pan_card: 'images/sample4.jpg',
+    bank_details: 'images/sample5.jpg',
     exename: 'Executive Name',
     user: req.user._id,
   });
@@ -57,6 +61,10 @@ const updateShop = asyncHandler(async (req, res) => {
     address,
     owner_name,
     owner_mobile,
+    trade_lic,
+    pan_card,
+    MISE_certificates,
+    bank_details,
     exename,
   } = req.body;
 
@@ -71,6 +79,10 @@ const updateShop = asyncHandler(async (req, res) => {
     shop.address = address;
     shop.owner_name = owner_name;
     shop.owner_mobile = owner_mobile;
+    shop.trade_lic = trade_lic;
+    shop.pan_card = pan_card;
+    shop.MISE_certificates = MISE_certificates;
+    shop.bank_details = bank_details;
     shop.exename = exename;
 
     const updatedShop = await shop.save();

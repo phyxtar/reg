@@ -33,6 +33,14 @@ const ShopEditScreen = () => {
   const [owner_mobile, setOwnerMobile] = useState('');
   const [exename, setExename] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [uploading2, setUploading2] = useState(false);
+  const [uploading3, setUploading3] = useState(false);
+  const [uploading4, setUploading4] = useState(false);
+  const [uploading5, setUploading5] = useState(false);
+  const [trade_lic, setTradeLic] = useState('');
+  const [pan_card, setPanCard] = useState('');
+  const [MISE_certificates, setMise] = useState('');
+  const [bank_details, setBank] = useState('');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -64,6 +72,10 @@ const ShopEditScreen = () => {
         setAddress(shop.address);
         setOwnerName(shop.owner_name);
         setOwnerMobile(shop.owner_mobile);
+        setTradeLic(shop.trade_lic);
+        setPanCard(shop.pan_card);
+        setMise(shop.MISE_certificates);
+        setBank(shop.bank_details);
         setExename(shop.exename);
       }
     }
@@ -92,6 +104,98 @@ const ShopEditScreen = () => {
     }
   };
 
+  const uploadFileHandler2 = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('trade_lic', file);
+    setUploading2(true);
+
+    try {
+      const config = {
+        header: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post('/api/upload2', formData, config);
+
+      setTradeLic(data);
+      setUploading2(false);
+    } catch (error) {
+      console.error(error);
+      setUploading2();
+    }
+  };
+
+  const uploadFileHandler3 = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('pan_card', file);
+    setUploading3(true);
+
+    try {
+      const config = {
+        header: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post('/api/upload3', formData, config);
+
+      setPanCard(data);
+      setUploading3(false);
+    } catch (error) {
+      console.error(error);
+      setUploading3();
+    }
+  };
+
+  const uploadFileHandler4 = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('MISE_certificates', file);
+    setUploading4(true);
+
+    try {
+      const config = {
+        header: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post('/api/upload4', formData, config);
+
+      setMise(data);
+      setUploading4(false);
+    } catch (error) {
+      console.error(error);
+      setUploading4();
+    }
+  };
+
+  const uploadFileHandler5 = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('bank_details', file);
+    setUploading5(true);
+
+    try {
+      const config = {
+        header: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post('/api/upload5', formData, config);
+
+      setBank(data);
+      setUploading5(false);
+    } catch (error) {
+      console.error(error);
+      setUploading5();
+    }
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(
@@ -105,6 +209,10 @@ const ShopEditScreen = () => {
         address,
         owner_name,
         owner_mobile,
+        trade_lic,
+        pan_card,
+        MISE_certificates,
+        bank_details,
         exename,
       })
     );
@@ -160,7 +268,6 @@ const ShopEditScreen = () => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
-
                     <MDBInput
                       wrapperClass='mb-4'
                       id='form2'
@@ -177,7 +284,6 @@ const ShopEditScreen = () => {
                       onChange={uploadFileHandler}
                     />
                     {uploading && <Loader />}
-
                     <MDBInput
                       wrapperClass='mb-4 mt-4'
                       id='form3'
@@ -226,7 +332,6 @@ const ShopEditScreen = () => {
                       value={owner_mobile}
                       onChange={(e) => setOwnerMobile(e.target.value)}
                     />
-
                     <MDBInput
                       wrapperClass='mb-4'
                       id='form3'
@@ -235,7 +340,93 @@ const ShopEditScreen = () => {
                       value={exename}
                       onChange={(e) => setExename(e.target.value)}
                     />
-
+                    <strong>
+                      The below document is required for become a member od
+                      Bazaar.com
+                    </strong>{' '}
+                    <br />
+                    <hr />
+                    <p style={{ fontWeight: 700, color: 'red' }}>
+                      Trade Lic :{' '}
+                    </p>
+                    <MDBInput
+                      wrapperClass='mb-4'
+                      id='form2'
+                      type='text'
+                      placeholder='Enter Trade Lic Url'
+                      value={trade_lic}
+                      onChange={(e) => setTradeLic(e.target.value)}
+                    />
+                    <MDBFile
+                      wrapperClass='mb-4'
+                      id='customFile'
+                      label='OR Upload Image'
+                      custom
+                      onChange={uploadFileHandler2}
+                    />
+                    {uploading2 && <Loader />}
+                    <hr />
+                    <hr />
+                    <p style={{ fontWeight: 700, color: 'red' }}>PAN Card : </p>
+                    <MDBInput
+                      wrapperClass='mb-4'
+                      id='form2'
+                      type='text'
+                      placeholder='Enter PAN Card Url'
+                      value={pan_card}
+                      onChange={(e) => setPanCard(e.target.value)}
+                    />
+                    <MDBFile
+                      wrapperClass='mb-4'
+                      id='customFile'
+                      label='OR Upload Image'
+                      custom
+                      onChange={uploadFileHandler3}
+                    />
+                    {uploading3 && <Loader />}
+                    <hr />
+                    <hr />
+                    <p style={{ fontWeight: 700, color: 'red' }}>
+                      MISE Certificate :{' '}
+                    </p>
+                    <MDBInput
+                      wrapperClass='mb-4'
+                      id='form2'
+                      type='text'
+                      placeholder='Enter Url'
+                      value={MISE_certificates}
+                      onChange={(e) => setMise(e.target.value)}
+                    />
+                    <MDBFile
+                      wrapperClass='mb-4'
+                      id='customFile'
+                      label='OR Upload Image'
+                      custom
+                      onChange={uploadFileHandler4}
+                    />
+                    {uploading4 && <Loader />}
+                    <hr />
+                    <hr />
+                    <p style={{ fontWeight: 700, color: 'red' }}>
+                      Bank Details :{' '}
+                    </p>
+                    <MDBInput
+                      wrapperClass='mb-4'
+                      id='form2'
+                      type='text'
+                      placeholder='Enter Url'
+                      value={bank_details}
+                      onChange={(e) => setBank(e.target.value)}
+                    />
+                    <MDBFile
+                      wrapperClass='mb-4'
+                      id='customFile'
+                      label='OR Upload Image'
+                      custom
+                      onChange={uploadFileHandler5}
+                    />
+                    {uploading5 && <Loader />}
+                    <hr />
                     <MDBBtn className='w-100 mb-4' size='md' type='submit'>
                       Update
                     </MDBBtn>

@@ -36,9 +36,9 @@ const ShopListScreen = () => {
   useEffect(() => {
     dispatch({ type: SHOP_CREATE_RESET });
 
-    if (!userInfo.isAdmin) {
-      navigate('/login');
-    }
+    // if (!userInfo.isAdmin) {
+    //   navigate('/login');
+    // }
 
     if (successCreate) {
       navigate(`/admin/shop/${createdShop._id}/edit`);
@@ -89,6 +89,7 @@ const ShopListScreen = () => {
                 <th>SHOP CATEGORY</th>
                 <th>SHOP OWNER</th>
                 <th>ADDED BY</th>
+                <th>Legal Approval</th>
                 <th></th>
               </tr>
             </thead>
@@ -96,7 +97,9 @@ const ShopListScreen = () => {
               {shops.map((shop) => (
                 <tr key={shop._id}>
                   <td>{shop._id}</td>
-                  <td>{shop.name}</td>
+                  <td>
+                    <a href={`/shop/${shop._id}`}> {shop.name}</a>
+                  </td>
                   <td>
                     <a href={`mailto:${shop.email}`} className='email-text'>
                       {shop.email}

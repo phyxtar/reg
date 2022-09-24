@@ -1,7 +1,14 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Row, Col, Image, ListGroup } from 'react-bootstrap';
+import {
+  Row,
+  Col,
+  Image,
+  ListGroup,
+  ListGroupItem,
+  Badge,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { listShopDetails } from '../actions/shopActions';
 import Message from '../components/Message';
@@ -41,10 +48,48 @@ const ShopScreen = () => {
               <ListGroup.Item>
                 <strong>Owner: {shop.owner_name}</strong>
               </ListGroup.Item>
+              <ListGroupItem>
+                <strong>Owner mobile No.: {shop.owner_mobile}</strong>
+              </ListGroupItem>
+
               <ListGroup.Item>Category: {shop.category}</ListGroup.Item>
               <ListGroup.Item>Email: {shop.email}</ListGroup.Item>
+              <ListGroup.Item>Mobile No.: {shop.mobile}</ListGroup.Item>
               <ListGroup.Item>Address: {shop.address}</ListGroup.Item>
+              <ListGroup.Item>
+                Shop Added By (Executive):{' '}
+                <Badge pill bg='info'>
+                  {shop.exename}
+                </Badge>{' '}
+              </ListGroup.Item>
             </ListGroup>
+
+            <h6
+              style={{
+                color: 'red',
+                marginTop: '30px',
+                textDecoration: 'underline',
+              }}
+            >
+              Required Documents of the Registered Shop *
+            </h6>
+
+            <Col md>
+              <strong>Trade Lic :</strong>
+              <Image src={shop.trade_lic} alt='Trade Lic' fluid />
+            </Col>
+            <Col md>
+              <strong>MISE Certificates :</strong>
+              <Image src={shop.MISE_certificates} alt='MISE' fluid />
+            </Col>
+            <Col md>
+              <strong>Pan Card :</strong>
+              <Image src={shop.pan_card} alt='PAN' fluid />
+            </Col>
+            <Col md>
+              <strong>Bank Details :</strong>
+              <Image src={shop.bank_details} alt='Bank Details' fluid />
+            </Col>
           </Col>
         </Row>
       )}

@@ -36,6 +36,18 @@ const shopSchema = mongoose.Schema(
     owner_mobile: {
       type: Number,
     },
+    trade_lic: {
+      type: String,
+    },
+    pan_card: {
+      type: String,
+    },
+    MISE_certificates: {
+      type: String,
+    },
+    bank_details: {
+      type: String,
+    },
     exename: {
       type: String,
       required: true,

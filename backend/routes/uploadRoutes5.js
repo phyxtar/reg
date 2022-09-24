@@ -27,18 +27,14 @@ function checkFileType(file, cb) {
   }
 }
 
-const upload = multer({
+const upload5 = multer({
   storage,
   fileFilter: function (req, file, cb) {
     checkFileType(file, cb);
   },
 });
 
-router.post('/', upload.single('image'), (req, res) => {
-  res.send(`/${req.file.path}`);
-});
-
-router.post('/', upload.single('trade_lic'), (req, res) => {
+router.post('/', upload5.single('bank_details'), (req, res) => {
   res.send(`/${req.file.path}`);
 });
 
