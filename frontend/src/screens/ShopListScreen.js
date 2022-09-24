@@ -89,7 +89,6 @@ const ShopListScreen = () => {
                 <th>SHOP CATEGORY</th>
                 <th>SHOP OWNER</th>
                 <th>ADDED BY</th>
-                <th>Legal Approval</th>
                 <th></th>
               </tr>
             </thead>
