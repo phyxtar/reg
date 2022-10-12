@@ -8,6 +8,7 @@ import { Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { listShopDetails, updateShop } from '../actions/shopActions';
 import { useParams } from 'react-router-dom';
+
 import {
   MDBBtn,
   MDBContainer,
@@ -17,6 +18,7 @@ import {
   MDBCardBody,
   MDBInput,
   MDBFile,
+  MDBCheckbox,
 } from 'mdb-react-ui-kit';
 import { SHOP_UPDATE_RESET } from '../constant/shopConstant';
 
@@ -32,15 +34,19 @@ const ShopEditScreen = () => {
   const [owner_name, setOwnerName] = useState('');
   const [owner_mobile, setOwnerMobile] = useState('');
   const [exename, setExename] = useState('');
+  const [price, setPrice] = useState('');
   const [uploading, setUploading] = useState(false);
   const [uploading2, setUploading2] = useState(false);
   const [uploading3, setUploading3] = useState(false);
   const [uploading4, setUploading4] = useState(false);
-  const [uploading5, setUploading5] = useState(false);
+  //const [uploading5, setUploading5] = useState(false);
   const [trade_lic, setTradeLic] = useState('');
   const [pan_card, setPanCard] = useState('');
   const [MISE_certificates, setMise] = useState('');
-  const [bank_details, setBank] = useState('');
+  const [account_number, setAccount] = useState('');
+  const [bank_name, setBankname] = useState('');
+  const [ifcs_number, setIfcs] = useState('');
+  const [isPaid, setIspaid] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -59,7 +65,8 @@ const ShopEditScreen = () => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: SHOP_UPDATE_RESET });
-      navigate('/admin/shoplist');
+      //navigate('/admin/shoplist');
+      navigate(`/welcome/shop/${shop._id}/edit`);
     } else {
       if (!shop.name || shop._id !== shopId) {
         dispatch(listShopDetails(shopId));
@@ -75,8 +82,12 @@ const ShopEditScreen = () => {
         setTradeLic(shop.trade_lic);
         setPanCard(shop.pan_card);
         setMise(shop.MISE_certificates);
-        setBank(shop.bank_details);
+        setBankname(shop.bank_name);
+        setAccount(shop.account_number);
+        setIfcs(shop.ifcs_number);
         setExename(shop.exename);
+        setPrice(shop.price);
+        setIspaid(shop.isPaid);
       }
     }
   }, [shop, shopId, dispatch, navigate, successUpdate]);
@@ -173,28 +184,28 @@ const ShopEditScreen = () => {
     }
   };
 
-  const uploadFileHandler5 = async (e) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('bank_details', file);
-    setUploading5(true);
+  // const uploadFileHandler5 = async (e) => {
+  //   const file = e.target.files[0];
+  //   const formData = new FormData();
+  //   formData.append('bank_details', file);
+  //   setUploading5(true);
 
-    try {
-      const config = {
-        header: {
-          'Content-Type': 'multipart/form-data',
-        },
-      };
+  //   try {
+  //     const config = {
+  //       header: {
+  //         'Content-Type': 'multipart/form-data',
+  //       },
+  //     };
 
-      const { data } = await axios.post('/api/upload5', formData, config);
+  //     const { data } = await axios.post('/api/upload5', formData, config);
 
-      setBank(data);
-      setUploading5(false);
-    } catch (error) {
-      console.error(error);
-      setUploading5();
-    }
-  };
+  //     setBank(data);
+  //     setUploading5(false);
+  //   } catch (error) {
+  //     console.error(error);
+  //     setUploading5();
+  //   }
+  // };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -212,10 +223,15 @@ const ShopEditScreen = () => {
         trade_lic,
         pan_card,
         MISE_certificates,
-        bank_details,
+        bank_name,
+        account_number,
+        ifcs_number,
         exename,
+        price,
+        isPaid,
       })
     );
+    //navigate(`/shop/${shop._id}`);
   };
 
   return (
@@ -236,8 +252,8 @@ const ShopEditScreen = () => {
               className='my-5 display-3 fw-bold ls-tight px-3'
               style={{ color: 'hsl(218, 81%, 95%)' }}
             >
-              Edit Shop <br />
-              <span style={{ color: 'hsl(218, 81%, 75%)' }}>Profile</span>
+              Edit <br />
+              <span style={{ color: 'hsl(218, 81%, 75%)' }}>Shop</span>
             </h1>
           </MDBCol>
 
@@ -260,6 +276,14 @@ const ShopEditScreen = () => {
               <Form onSubmit={submitHandler}>
                 <MDBCard className='my-5 bg-glass'>
                   <MDBCardBody className='p-5'>
+                    {/* <MDBCheckbox
+                      wrapperClass='mb-4'
+                      id='form3'
+                      label='is Paid ?'
+                      type='checkbox'
+                      checked={isPaid}
+                      onChange={(e) => setIspaid(e.target.checked)}
+                    /> */}
                     <MDBInput
                       wrapperClass='mb-4'
                       id='form2'
@@ -267,6 +291,7 @@ const ShopEditScreen = () => {
                       placeholder='Enter Your Name'
                       value={name}
                       onChange={(e) => setName(e.target.value)}
+                      required
                     />
                     <MDBInput
                       wrapperClass='mb-4'
@@ -291,6 +316,7 @@ const ShopEditScreen = () => {
                       placeholder='Enter Category'
                       value={category}
                       onChange={(e) => setCategory(e.target.value)}
+                      required
                     />
                     <MDBInput
                       wrapperClass='mb-4'
@@ -299,6 +325,7 @@ const ShopEditScreen = () => {
                       placeholder='email@example.com'
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      required
                     />
                     <MDBInput
                       wrapperClass='mb-4'
@@ -307,6 +334,7 @@ const ShopEditScreen = () => {
                       placeholder='Enter Mobile Number'
                       value={mobile}
                       onChange={(e) => setMobile(e.target.value)}
+                      required
                     />
                     <MDBInput
                       wrapperClass='mb-4'
@@ -315,6 +343,7 @@ const ShopEditScreen = () => {
                       placeholder='Enter Address'
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
+                      required
                     />
                     <MDBInput
                       wrapperClass='mb-4'
@@ -323,6 +352,7 @@ const ShopEditScreen = () => {
                       placeholder='Owner Name'
                       value={owner_name}
                       onChange={(e) => setOwnerName(e.target.value)}
+                      required
                     />
                     <MDBInput
                       wrapperClass='mb-4'
@@ -331,6 +361,7 @@ const ShopEditScreen = () => {
                       placeholder='Owner Mobile Number'
                       value={owner_mobile}
                       onChange={(e) => setOwnerMobile(e.target.value)}
+                      required
                     />
                     <MDBInput
                       wrapperClass='mb-4'
@@ -339,6 +370,16 @@ const ShopEditScreen = () => {
                       placeholder='Executive Name'
                       value={exename}
                       onChange={(e) => setExename(e.target.value)}
+                      required
+                    />
+                    <MDBInput
+                      wrapperClass='mb-4'
+                      id='form3'
+                      type='number'
+                      placeholder='Price'
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                      required
                     />
                     <strong>
                       The below document is required for become a member od
@@ -414,18 +455,38 @@ const ShopEditScreen = () => {
                       wrapperClass='mb-4'
                       id='form2'
                       type='text'
-                      placeholder='Enter Url'
-                      value={bank_details}
-                      onChange={(e) => setBank(e.target.value)}
+                      placeholder='Enter Bank Name'
+                      value={bank_name}
+                      onChange={(e) => setBankname(e.target.value)}
                     />
-                    <MDBFile
+                    <MDBInput
                       wrapperClass='mb-4'
-                      id='customFile'
-                      label='OR Upload Image'
-                      custom
-                      onChange={uploadFileHandler5}
+                      id='form2'
+                      type='text'
+                      placeholder='Enter Account Number'
+                      value={account_number}
+                      onChange={(e) => setAccount(e.target.value)}
                     />
-                    {uploading5 && <Loader />}
+                    <MDBInput
+                      wrapperClass='mb-4'
+                      id='form2'
+                      type='text'
+                      placeholder='Enter IFSC'
+                      value={ifcs_number}
+                      onChange={(e) => setIfcs(e.target.value)}
+                    />
+                    <hr />
+                    <div class='tacbox'>
+                      <input id='checkbox' type='checkbox' />
+                      <label for='checkbox' class='px-3'>
+                        {' '}
+                        I agree to these{' '}
+                        <a href='../img/Term.docx' download>
+                          Terms and Conditions
+                        </a>
+                        .
+                      </label>
+                    </div>
                     <hr />
                     <MDBBtn className='w-100 mb-4' size='md' type='submit'>
                       Update

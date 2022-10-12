@@ -43,8 +43,11 @@ const createShop = asyncHandler(async (req, res) => {
     trade_lic: 'images/sample2.jpg',
     MISE_certificates: 'images/sample3.jpg',
     pan_card: 'images/sample4.jpg',
-    bank_details: 'images/sample5.jpg',
+    bank_name: 'Bank Name',
+    account_number: '1234567890',
+    ifcs_number: 'Ifcs Number',
     exename: 'Executive Name',
+    price: 0,
     user: req.user._id,
   });
   const createdShop = await shop.save();
@@ -64,8 +67,11 @@ const updateShop = asyncHandler(async (req, res) => {
     trade_lic,
     pan_card,
     MISE_certificates,
-    bank_details,
+    bank_name,
+    account_number,
+    ifcs_number,
     exename,
+    price,
   } = req.body;
 
   const shop = await Shop.findById(req.params.id);
@@ -82,8 +88,13 @@ const updateShop = asyncHandler(async (req, res) => {
     shop.trade_lic = trade_lic;
     shop.pan_card = pan_card;
     shop.MISE_certificates = MISE_certificates;
-    shop.bank_details = bank_details;
+    shop.bank_name = bank_name;
+    shop.account_number = account_number;
+    shop.ifcs_number = ifcs_number;
     shop.exename = exename;
+    shop.price = price;
+    shop.isPaid = req.body.isPaid;
+    shop.isApproved = req.body.isApproved;
 
     const updatedShop = await shop.save();
     res.json(updatedShop);

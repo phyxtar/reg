@@ -21,6 +21,11 @@ const userSchema = mongoose.Schema(
       default: false,
       required: true,
     },
+    isLegal: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
   },
   {
     timestamps: true,

@@ -49,10 +49,7 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload:
-        error.reponse && error.reponse.data.message
-          ? error.reponse.data.message
-          : error.message,
+      payload: 'Invalid Login Credentials',
     });
   }
 };

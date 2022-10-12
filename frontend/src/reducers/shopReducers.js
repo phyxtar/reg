@@ -16,6 +16,7 @@ import {
   SHOP_UPDATE_FAIL,
   SHOP_UPDATE_SUCCESS,
   SHOP_UPDATE_REQUEST,
+  SAVE_SHIPPING_ADDRESS,
 } from '../constant/shopConstant';
 
 export const shopListReducer = (state = { shops: [] }, action) => {
@@ -82,6 +83,7 @@ export const shopUpdateReducer = (state = { shop: {} }, action) => {
       return { loading: false, error: action.payload };
     case SHOP_UPDATE_RESET:
       return { shop: {} };
+    case SAVE_SHIPPING_ADDRESS:
     default:
       return state;
   }

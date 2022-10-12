@@ -60,6 +60,16 @@ const Header = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               )}
+              {userInfo && userInfo.isLegal && (
+                <NavDropdown title='Legal' id='legalteammenu'>
+                  <LinkContainer to='/admin/shoplist'>
+                    <NavDropdown.Item>Registered Shop</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

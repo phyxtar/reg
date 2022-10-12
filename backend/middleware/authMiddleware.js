@@ -39,4 +39,13 @@ const admin = (req, res, next) => {
   }
 };
 
-export { protect, admin };
+const legal = (req, res, next) => {
+  if (req.user && req.user.isLegal) {
+    next();
+  } else {
+    res.status(401);
+    throw new Error('Not authorized as an legal');
+  }
+};
+
+export { protect, admin, legal };

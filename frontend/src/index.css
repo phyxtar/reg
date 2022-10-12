@@ -42,3 +42,8 @@ footer {
   background-color: rebeccapurple;
   color: white;
 }
+img.congrat {
+  /* width: 300px; */
+  position: absolute;
+}
+/* ----------------------------- */

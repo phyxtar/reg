@@ -32,24 +32,54 @@ const shopSchema = mongoose.Schema(
     },
     owner_name: {
       type: String,
+      required: true,
     },
     owner_mobile: {
       type: Number,
+      required: true,
     },
     trade_lic: {
       type: String,
+      required: true,
     },
     pan_card: {
       type: String,
+      required: true,
     },
     MISE_certificates: {
       type: String,
+      required: true,
     },
-    bank_details: {
+    bank_name: {
       type: String,
+      required: true,
     },
+    account_number: {
+      type: Number,
+      required: true,
+    },
+    ifcs_number: {
+      type: String,
+      required: true,
+    },
+
     exename: {
       type: String,
+      required: true,
+    },
+    price: {
+      type: String,
+      required: true,
+      default: 0,
+    },
+    isPaid: {
+      type: Boolean,
+      default: false,
+      required: true,
+    },
+    isApproved: {
+      type: Boolean,
+      default: false,
       required: true,
     },
   },

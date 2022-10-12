@@ -3,7 +3,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { Table, Button, Container, Badge, Row, Col } from 'react-bootstrap';
+import { Table, Button, Container, Row, Col, Badge } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { listShop, deleteShop, createShop } from '../actions/shopActions';
 import { SHOP_CREATE_RESET } from '../constant/shopConstant';
@@ -83,21 +83,24 @@ const ShopListScreen = () => {
           <Table striped bordered hover responsive className='table-sm'>
             <thead>
               <tr>
-                <th>SHOP ID</th>
+                <th>DATE</th>
                 <th>SHOP NAME</th>
                 <th>SHOP EMAIL</th>
                 <th>SHOP CATEGORY</th>
                 <th>SHOP OWNER</th>
                 <th>ADDED BY</th>
+                <th>PAYMENT</th>
+                <th>APPROVED BY LEGAL</th>
+
                 <th></th>
               </tr>
             </thead>
             <tbody>
               {shops.map((shop) => (
                 <tr key={shop._id}>
-                  <td>{shop._id}</td>
+                  <td>{new Date(shop.createdAt).toDateString()}</td>
                   <td>
-                    <a href={`/shop/${shop._id}`}> {shop.name}</a>
+                    <a href={`/legal/shop/${shop._id}/edit`}> {shop.name}</a>
                   </td>
                   <td>
                     <a href={`mailto:${shop.email}`} className='email-text'>
@@ -107,6 +110,27 @@ const ShopListScreen = () => {
                   <td>{shop.category}</td>
                   <td>{shop.owner_name}</td>
                   <td>{shop.exename}</td>
+                  <td>
+                    {shop.isPaid ? (
+                      <Badge pill bg='success'>
+                        Paid
+                      </Badge>
+                    ) : (
+                      <Badge pill bg='danger'>
+                        Not Paid Yet
+                      </Badge>
+                    )}
+                  </td>
+                  <td>
+                    {shop.isApproved ? (
+                      <i
+                        className='fas fa-check'
+                        style={{ color: 'green' }}
+                      ></i>
+                    ) : (
+                      <i className='fas fa-times' style={{ color: 'red' }}></i>
+                    )}
+                  </td>
                   <td>
                     <LinkContainer to={`/admin/shop/${shop._id}/edit`}>
                       <Button variant='light' className='btn-sm'>

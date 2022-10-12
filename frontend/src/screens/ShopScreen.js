@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Row,
   Col,
@@ -10,11 +11,12 @@ import {
   Badge,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { listShopDetails } from '../actions/shopActions';
+import { listShopDetails, updateShop } from '../actions/shopActions';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 
 const ShopScreen = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
 
@@ -24,6 +26,11 @@ const ShopScreen = () => {
   useEffect(() => {
     dispatch(listShopDetails(id));
   }, [id, dispatch]);
+
+  const addToCartHandler = () => {
+    navigate(`/cart/${id}?`);
+    //window.location.href = `/cart/${id}`;
+  };
 
   return (
     <>
@@ -39,17 +46,26 @@ const ShopScreen = () => {
           <Col md={6}>
             <Image src={shop.image} alt={shop.name} fluid />
           </Col>
-
           <Col md={6}>
             <ListGroup variant='flush'>
               <ListGroup.Item>
-                <h3>{shop.name}</h3>
+                <h3>
+                  {shop.name}{' '}
+                  <span
+                    style={{
+                      color: '#6A44BB',
+                      fontSize: '17px',
+                    }}
+                  >
+                    ({shop._id})
+                  </span>
+                </h3>
               </ListGroup.Item>
               <ListGroup.Item>
-                <strong>Owner: {shop.owner_name}</strong>
+                Owner:<strong> {shop.owner_name}</strong>
               </ListGroup.Item>
               <ListGroupItem>
-                <strong>Owner mobile No.: {shop.owner_mobile}</strong>
+                Owner mobile No.: <strong> {shop.owner_mobile}</strong>
               </ListGroupItem>
 
               <ListGroup.Item>Category: {shop.category}</ListGroup.Item>
@@ -88,7 +104,20 @@ const ShopScreen = () => {
             </Col>
             <Col md>
               <strong>Bank Details :</strong>
-              <Image src={shop.bank_details} alt='Bank Details' fluid />
+              <ListGroup>
+                <ListGroup.Item>
+                  <span style={{ fontWeight: 'bold' }}>Bank Name:</span>{' '}
+                  {shop.bank_name}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <span style={{ fontWeight: 'bold' }}>Bank Account No.:</span>{' '}
+                  {shop.account_number}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <span style={{ fontWeight: 'bold' }}>Bank IFSC:</span>{' '}
+                  {shop.ifcs_number}
+                </ListGroup.Item>
+              </ListGroup>
             </Col>
           </Col>
         </Row>
