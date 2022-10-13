@@ -135,17 +135,7 @@ const FinalScreen = () => {
         className='p-4 background-radial-gradient overflow-hidden'
       >
         <MDBRow>
-          <MDBCol md='4'>
-            <div>
-              <img
-                alt='Congrat'
-                className='congrat'
-                src={require('../img/QR.jpeg')}
-              />
-            </div>
-          </MDBCol>
-
-          <MDBCol md='4' className='position-relative'>
+          <MDBCol md='8' className='position-relative'>
             <Message>
               <p>
                 Thanks For Registering With Us 😊,We Will Get Back To You
@@ -182,39 +172,50 @@ const FinalScreen = () => {
               </Form>
             )}
           </MDBCol>
-          <MDBCol md='4' className='mt-3'>
-            <div className='qr-text'>
-              {' '}
-              <p>
-                <strong className='qr-text'>UPI ID:</strong>{' '}
-                <span
-                  style={{
-                    color: 'white',
-                  }}
-                >
-                  msrabasupermartprivatelimited.eazypay@icici
-                </span>
-              </p>
-              <hr />
-              <h2 style={{ color: 'white' }} className='text-center'>
-                OR
-              </h2>
-              <h6 style={{ color: 'white' }}>IMPS / NFET or Bank Transfer</h6>
-              <div style={{ color: 'white' }}>
+        </MDBRow>
+        <MDBRow>
+          <MDBCol md='12' className='mt-3'>
+            <div className=''>
+              <div>
+                <img
+                  alt='Congrat'
+                  className=''
+                  src={require('../img/QR.jpeg')}
+                />
+              </div>
+              <div className='qr-text mt-5'>
+                {' '}
                 <p>
-                  <strong className='qr-text'>Banificiary Name: </strong>RA BA
-                  SUPERMART PRIVATE LIMITED
+                  <strong className='qr-text'>UPI ID:</strong>{' '}
+                  <span
+                    style={{
+                      color: 'white',
+                    }}
+                  >
+                    msrabasupermartprivatelimited.eazypay@icici
+                  </span>
                 </p>
-                <p>
-                  <strong className='qr-text'>Account No. : </strong>
-                  7926052000034
-                </p>
-                <p>
-                  <strong className='qr-text'>IFCS No. : </strong>ICIC0007926
-                </p>
+                <hr />
+                <h2 style={{ color: 'white' }} className='text-center'>
+                  OR
+                </h2>
+                <h6 style={{ color: 'white' }}>IMPS / NEFT or Bank Transfer</h6>
+                <div style={{ color: 'white' }}>
+                  <p>
+                    <strong className='qr-text'>Banificiary Name: </strong>RA BA
+                    SUPERMART PRIVATE LIMITED
+                  </p>
+                  <p>
+                    <strong className='qr-text'>Account No. : </strong>
+                    7926052000034
+                  </p>
+                  <p>
+                    <strong className='qr-text'>IFCS No. : </strong>ICIC0007926
+                  </p>
+                </div>
               </div>
             </div>
-          </MDBCol>
+          </MDBCol>{' '}
         </MDBRow>
       </MDBContainer>
     </>
