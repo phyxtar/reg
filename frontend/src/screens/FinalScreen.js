@@ -14,8 +14,6 @@ import {
   MDBCol,
   MDBCard,
   MDBCardBody,
-  MDBInput,
-  MDBFile,
   MDBCheckbox,
 } from 'mdb-react-ui-kit';
 import { SHOP_UPDATE_RESET } from '../constant/shopConstant';
@@ -33,7 +31,6 @@ const FinalScreen = () => {
   const [owner_mobile, setOwnerMobile] = useState('');
   const [exename, setExename] = useState('');
   const [price, setPrice] = useState('');
-
   const [trade_lic, setTradeLic] = useState('');
   const [pan_card, setPanCard] = useState('');
   const [MISE_certificates, setMise] = useState('');
@@ -138,22 +135,26 @@ const FinalScreen = () => {
         className='p-4 background-radial-gradient overflow-hidden'
       >
         <MDBRow>
-          <MDBCol
-            md='9'
-            className='position-relative'
-            style={{
-              textAlign: 'center',
-            }}
-          >
+          <MDBCol md='4'>
+            <div>
+              <img
+                alt='Congrat'
+                className='congrat'
+                src={require('../img/QR.jpeg')}
+              />
+            </div>
+          </MDBCol>
+
+          <MDBCol md='4' className='position-relative'>
             <Message>
               <p>
                 Thanks For Registering With Us 😊,We Will Get Back To You
                 Shortly...
               </p>
-              <p>One Of Our Representative Will Get Touch With You Soon...</p>
+              <p>One Of Our Representative Will Get n Touch With You Soon...</p>
             </Message>
           </MDBCol>
-          <MDBCol md='3' className='position-relative'>
+          <MDBCol md='4' className='position-relative'>
             {loadingUpdate && <Loader />}
             {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
             {loading ? (
@@ -180,6 +181,39 @@ const FinalScreen = () => {
                 </MDBCard>
               </Form>
             )}
+          </MDBCol>
+          <MDBCol md='4' className='mt-3'>
+            <div className='qr-text'>
+              {' '}
+              <p>
+                <strong className='qr-text'>UPI ID:</strong>{' '}
+                <span
+                  style={{
+                    color: 'white',
+                  }}
+                >
+                  msrabasupermartprivatelimited.eazypay@icici
+                </span>
+              </p>
+              <hr />
+              <h2 style={{ color: 'white' }} className='text-center'>
+                OR
+              </h2>
+              <h6 style={{ color: 'white' }}>IMPS / NFET or Bank Transfer</h6>
+              <div style={{ color: 'white' }}>
+                <p>
+                  <strong className='qr-text'>Banificiary Name: </strong>RA BA
+                  SUPERMART PRIVATE LIMITED
+                </p>
+                <p>
+                  <strong className='qr-text'>Account No. : </strong>
+                  7926052000034
+                </p>
+                <p>
+                  <strong className='qr-text'>IFCS No. : </strong>ICIC0007926
+                </p>
+              </div>
+            </div>
           </MDBCol>
         </MDBRow>
       </MDBContainer>

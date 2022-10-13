@@ -80,7 +80,6 @@ const shopSchema = mongoose.Schema(
     isApproved: {
       type: Boolean,
       default: false,
-      required: true,
     },
   },
   {

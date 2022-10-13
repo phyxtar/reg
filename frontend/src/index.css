@@ -46,4 +46,7 @@ img.congrat {
   /* width: 300px; */
   position: absolute;
 }
+strong.qr-text {
+  color: white !important;
+}
 /* ----------------------------- */
