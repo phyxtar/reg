@@ -44,6 +44,7 @@ const LegalScreen = () => {
   const [owner_mobile, setOwnerMobile] = useState('');
   const [exename, setExename] = useState('');
   const [price, setPrice] = useState('');
+  const [price2, setPrice2] = useState('');
   const [uploading, setUploading] = useState(false);
   const [uploading2, setUploading2] = useState(false);
   const [uploading3, setUploading3] = useState(false);
@@ -98,6 +99,8 @@ const LegalScreen = () => {
         setIfcs(shop.ifcs_number);
         setExename(shop.exename);
         setPrice(shop.price);
+        setPrice2(shop.price2);
+
         setIspaid(shop.isPaid);
         setIsapproved(shop.isApproved);
       }
@@ -125,6 +128,7 @@ const LegalScreen = () => {
         ifcs_number,
         exename,
         price,
+        price2,
         isPaid,
         isApproved,
       })

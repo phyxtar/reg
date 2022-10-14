@@ -47,7 +47,8 @@ const createShop = asyncHandler(async (req, res) => {
     account_number: '1234567890',
     ifcs_number: 'Ifcs Number',
     exename: 'Executive Name',
-    price: 0,
+    price: 1198,
+    price2: 698,
     user: req.user._id,
   });
   const createdShop = await shop.save();
@@ -72,6 +73,7 @@ const updateShop = asyncHandler(async (req, res) => {
     ifcs_number,
     exename,
     price,
+    price2,
   } = req.body;
 
   const shop = await Shop.findById(req.params.id);
@@ -93,6 +95,7 @@ const updateShop = asyncHandler(async (req, res) => {
     shop.ifcs_number = ifcs_number;
     shop.exename = exename;
     shop.price = price;
+    shop.price2 = price2;
     shop.isPaid = req.body.isPaid;
     shop.isApproved = req.body.isApproved;
 

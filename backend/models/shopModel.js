@@ -70,7 +70,12 @@ const shopSchema = mongoose.Schema(
     price: {
       type: String,
       required: true,
-      default: 0,
+      default: 1198,
+    },
+    price2: {
+      type: String,
+      required: true,
+      default: 698,
     },
     isPaid: {
       type: Boolean,

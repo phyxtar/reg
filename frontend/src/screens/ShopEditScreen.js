@@ -35,6 +35,7 @@ const ShopEditScreen = () => {
   const [owner_mobile, setOwnerMobile] = useState('');
   const [exename, setExename] = useState('');
   const [price, setPrice] = useState('');
+  const [price2, setPrice2] = useState('');
   const [uploading, setUploading] = useState(false);
   const [uploading2, setUploading2] = useState(false);
   const [uploading3, setUploading3] = useState(false);
@@ -87,6 +88,7 @@ const ShopEditScreen = () => {
         setIfcs(shop.ifcs_number);
         setExename(shop.exename);
         setPrice(shop.price);
+        setPrice2(shop.price2);
         setIspaid(shop.isPaid);
       }
     }
@@ -228,6 +230,7 @@ const ShopEditScreen = () => {
         ifcs_number,
         exename,
         price,
+        price2,
         isPaid,
       })
     );
@@ -373,12 +376,23 @@ const ShopEditScreen = () => {
                       required
                     />
                     <MDBInput
+                      label='Starter plan'
                       wrapperClass='mb-4'
                       id='form3'
                       type='number'
-                      placeholder='Price'
+                      placeholder='Starter Plan'
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
+                      required
+                    />
+                    <MDBInput
+                      label='Digital Marketing plan'
+                      wrapperClass='mb-4'
+                      id='form3'
+                      type='number'
+                      placeholder='Degital Marketing Plan'
+                      value={price2}
+                      onChange={(e) => setPrice2(e.target.value)}
                       required
                     />
                     <strong>
@@ -428,7 +442,7 @@ const ShopEditScreen = () => {
                     <hr />
                     <hr />
                     <p style={{ fontWeight: 700, color: 'red' }}>
-                      MISE Certificate :{' '}
+                      MSME Certificate :{' '}
                     </p>
                     <MDBInput
                       wrapperClass='mb-4'

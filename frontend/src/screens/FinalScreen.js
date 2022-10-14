@@ -31,6 +31,7 @@ const FinalScreen = () => {
   const [owner_mobile, setOwnerMobile] = useState('');
   const [exename, setExename] = useState('');
   const [price, setPrice] = useState('');
+  const [price2, setPrice2] = useState('');
   const [trade_lic, setTradeLic] = useState('');
   const [pan_card, setPanCard] = useState('');
   const [MISE_certificates, setMise] = useState('');
@@ -78,6 +79,7 @@ const FinalScreen = () => {
         setIfcs(shop.ifcs_number);
         setExename(shop.exename);
         setPrice(shop.price);
+        setPrice2(shop.price2);
         setIspaid(shop.isPaid);
       }
     }
@@ -104,6 +106,7 @@ const FinalScreen = () => {
         ifcs_number,
         exename,
         price,
+        price2,
         isPaid,
       })
     );
