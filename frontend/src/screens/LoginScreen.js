@@ -62,7 +62,7 @@ const LoginScreen = () => {
             </span>
           </h1>
 
-          <p className='px-3' style={{ color: 'hsl(218, 81%, 85%)' }}>
+          <p className='px-3 mb-5' style={{ color: 'hsl(218, 81%, 85%)' }}>
             This is restricted area! If you think you do not belong to this
             place then please jump out 😀
           </p>

@@ -64,17 +64,17 @@ const RegisterScreen = () => {
             className='my-5 display-3 fw-bold ls-tight px-3'
             style={{ color: 'hsl(218, 81%, 95%)' }}
           >
-            The best offer <br />
             <span style={{ color: 'hsl(218, 81%, 75%)' }}>
-              for your business
+              Looks like you're new here!
             </span>
           </h1>
 
-          <p className='px-3' style={{ color: 'hsl(218, 81%, 85%)' }}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet,
-            itaque accusantium odio, soluta, corrupti aliquam quibusdam tempora
-            at cupiditate quis eum maiores libero veritatis? Dicta facilis sint
-            aliquid ipsum atque?
+          <p
+            className='px-3 mb-5'
+            style={{ color: 'hsl(218, 81%, 85%)', fontSize: '20px' }}
+          >
+            Join our group in few minutes! Sign up with your details to get
+            started...☺
           </p>
         </MDBCol>
 
