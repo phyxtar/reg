@@ -24,7 +24,7 @@ const App = () => {
       <Header />
       <main className='py-3'>
         <Routes>
-          <Route path='/home' element={<HomScreen />} exact />
+          {/* <Route path='/home' element={<HomScreen />} exact /> */}
           <Route path='/shop/:id' element={<ShopScreen />} exact />
           <Route path='/cart/:id' element={<CartScreen />} exact />
           <Route path='/cart' element={<CartScreen />} exact />
