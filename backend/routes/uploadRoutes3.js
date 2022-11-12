@@ -34,7 +34,7 @@ const upload3 = multer({
   },
 });
 
-router.post('/', upload3.single('pan_card'), (req, res) => {
+router.post('/', upload3.single('MISE_certificates'), (req, res) => {
   res.send(`/${req.file.path}`);
 });
 

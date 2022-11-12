@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { Form } from 'react-bootstrap';
+import { Form, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { getUserDetails, updateUser } from '../actions/userActions';
-import { USER_UPDATE_RESET } from '../constant/userConstant';
-import { useParams } from 'react-router-dom';
+
 import {
   MDBBtn,
   MDBContainer,
@@ -19,16 +18,19 @@ import {
   MDBIcon,
   MDBCheckbox,
 } from 'mdb-react-ui-kit';
+import { useParams } from 'react-router-dom';
+import { USER_UPDATE_RESET } from '../constants/userConstant';
 
 const UserEditScreen = () => {
   const { id } = useParams();
+  const userId = id;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isLegal, setIsLegal] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userId = id;
 
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
@@ -51,24 +53,25 @@ const UserEditScreen = () => {
         setName(user.name);
         setEmail(user.email);
         setIsAdmin(user.isAdmin);
+        setIsLegal(user.isLegal);
       }
     }
-  }, [user, userId, dispatch, successUpdate, navigate]);
+  }, [dispatch, userId, user, successUpdate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(updateUser({ _id: userId, name, email, isAdmin }));
+    dispatch(updateUser({ _id: userId, name, email, isAdmin, isLegal }));
   };
 
   return (
     <>
-      <Link to='/admin/userlist' className='btn btn-light my-3'>
-        Go Back
-      </Link>
       <MDBContainer
         fluid
         className='p-4 background-radial-gradient overflow-hidden'
       >
+        <Link to='/admin/userlist' clasName='btn btn-light my-3'>
+          Go Back
+        </Link>
         <MDBRow>
           <MDBCol
             md='6'
@@ -78,9 +81,19 @@ const UserEditScreen = () => {
               className='my-5 display-3 fw-bold ls-tight px-3'
               style={{ color: 'hsl(218, 81%, 95%)' }}
             >
-              Update Member's <br />
-              <span style={{ color: 'hsl(218, 81%, 75%)' }}>Profile</span>
+              Edit <br />
+              <span style={{ color: 'hsl(218, 81%, 75%)' }}>
+                Member's Details
+              </span>
             </h1>
+
+            <p
+              className='px-3 mb-5'
+              style={{ color: 'hsl(218, 81%, 85%)', fontSize: '20px' }}
+            >
+              Join our group in few minutes! Sign up with your details to get
+              started...☺
+            </p>
           </MDBCol>
 
           <MDBCol md='6' className='position-relative'>
@@ -118,59 +131,27 @@ const UserEditScreen = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
-
                     <MDBCheckbox
                       wrapperClass='mb-4'
                       id='form3'
-                      label='Want To Make Admin ?'
+                      label='Want To Make This Member as Admin ?'
                       type='checkbox'
                       checked={isAdmin}
                       onChange={(e) => setIsAdmin(e.target.checked)}
                     />
 
+                    <MDBCheckbox
+                      wrapperClass='mb-4'
+                      id='form3'
+                      label='Want To Make This Member as Legal ?'
+                      type='checkbox'
+                      checked={isLegal}
+                      onChange={(e) => setIsLegal(e.target.checked)}
+                    />
+
                     <MDBBtn className='w-100 mb-4' size='md' type='submit'>
                       Update
                     </MDBBtn>
-
-                    <div className='text-center'>
-                      <p>or sign up with:</p>
-
-                      <MDBBtn
-                        tag='a'
-                        color='none'
-                        className='mx-3'
-                        style={{ color: '#1266f1' }}
-                      >
-                        <MDBIcon fab icon='facebook-f' size='sm' />
-                      </MDBBtn>
-
-                      <MDBBtn
-                        tag='a'
-                        color='none'
-                        className='mx-3'
-                        style={{ color: '#1266f1' }}
-                      >
-                        <MDBIcon fab icon='twitter' size='sm' />
-                      </MDBBtn>
-
-                      <MDBBtn
-                        tag='a'
-                        color='none'
-                        className='mx-3'
-                        style={{ color: '#1266f1' }}
-                      >
-                        <MDBIcon fab icon='google' size='sm' />
-                      </MDBBtn>
-
-                      <MDBBtn
-                        tag='a'
-                        color='none'
-                        className='mx-3'
-                        style={{ color: '#1266f1' }}
-                      >
-                        <MDBIcon fab icon='github' size='sm' />
-                      </MDBBtn>
-                    </div>
                   </MDBCardBody>
                 </MDBCard>
               </Form>

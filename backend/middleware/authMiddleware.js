@@ -44,7 +44,7 @@ const legal = (req, res, next) => {
     next();
   } else {
     res.status(401);
-    throw new Error('Not authorized as an legal');
+    throw new Error('Not authorized as legal');
   }
 };
 

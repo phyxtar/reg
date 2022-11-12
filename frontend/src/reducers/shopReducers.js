@@ -5,21 +5,20 @@ import {
   SHOP_DETAILS_REQUEST,
   SHOP_DETAILS_SUCCESS,
   SHOP_DETAILS_FAIL,
-  SHOP_DELETE_FAIL,
-  SHOP_DELETE_SUCCESS,
   SHOP_DELETE_REQUEST,
+  SHOP_DELETE_SUCCESS,
+  SHOP_DELETE_FAIL,
   SHOP_CREATE_REQUEST,
   SHOP_CREATE_SUCCESS,
   SHOP_CREATE_FAIL,
   SHOP_CREATE_RESET,
-  SHOP_UPDATE_RESET,
-  SHOP_UPDATE_FAIL,
-  SHOP_UPDATE_SUCCESS,
   SHOP_UPDATE_REQUEST,
-  SAVE_SHIPPING_ADDRESS,
-} from '../constant/shopConstant';
+  SHOP_UPDATE_SUCCESS,
+  SHOP_UPDATE_FAIL,
+  SHOP_UPDATE_RESET,
+} from '../constants/shopConstant';
 
-export const shopListReducer = (state = { shops: [] }, action) => {
+export const shopListReducers = (state = { shops: [] }, action) => {
   switch (action.type) {
     case SHOP_LIST_REQUEST:
       return { loading: true, shops: [] };
@@ -32,7 +31,7 @@ export const shopListReducer = (state = { shops: [] }, action) => {
   }
 };
 
-export const shopDetailsReducer = (state = { shop: [] }, action) => {
+export const shopDetailsReducers = (state = { shop: [] }, action) => {
   switch (action.type) {
     case SHOP_DETAILS_REQUEST:
       return { loading: true, ...state };
@@ -45,7 +44,7 @@ export const shopDetailsReducer = (state = { shop: [] }, action) => {
   }
 };
 
-export const shopDeleteReducer = (state = {}, action) => {
+export const shopDeleteReducers = (state = {}, action) => {
   switch (action.type) {
     case SHOP_DELETE_REQUEST:
       return { loading: true };
@@ -58,7 +57,7 @@ export const shopDeleteReducer = (state = {}, action) => {
   }
 };
 
-export const shopCreateReducer = (state = {}, action) => {
+export const shopCreateReducers = (state = {}, action) => {
   switch (action.type) {
     case SHOP_CREATE_REQUEST:
       return { loading: true };
@@ -73,7 +72,7 @@ export const shopCreateReducer = (state = {}, action) => {
   }
 };
 
-export const shopUpdateReducer = (state = { shop: {} }, action) => {
+export const shopUpdateReducers = (state = { shop: {} }, action) => {
   switch (action.type) {
     case SHOP_UPDATE_REQUEST:
       return { loading: true };
@@ -82,8 +81,7 @@ export const shopUpdateReducer = (state = { shop: {} }, action) => {
     case SHOP_UPDATE_FAIL:
       return { loading: false, error: action.payload };
     case SHOP_UPDATE_RESET:
-      return { shop: {} };
-    case SAVE_SHIPPING_ADDRESS:
+      return {};
     default:
       return state;
   }

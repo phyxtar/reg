@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Shop = ({ shop }) => {
   return (
@@ -15,13 +15,18 @@ const Shop = ({ shop }) => {
             <strong>{shop.name}</strong>
           </Card.Title>
         </Link>
-
-        <Card.Text as='div'>
-          <p>{shop.category}</p>
-        </Card.Text>
-
-        <Card.Text as='h6'>{shop.address}</Card.Text>
       </Card.Body>
+
+      <Card.Text as='div'>
+        <div className='my-3'>{shop.category}</div>
+      </Card.Text>
+
+      <Card.Text as='div'>
+        <div className='my-3'>{shop.email}</div>
+      </Card.Text>
+      <Card.Text as='div'>
+        <div className='my-3'>{shop.mobile}</div>
+      </Card.Text>
     </Card>
   );
 };

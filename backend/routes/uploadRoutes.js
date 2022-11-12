@@ -38,8 +38,4 @@ router.post('/', upload.single('image'), (req, res) => {
   res.send(`/${req.file.path}`);
 });
 
-router.post('/', upload.single('trade_lic'), (req, res) => {
-  res.send(`/${req.file.path}`);
-});
-
 export default router;

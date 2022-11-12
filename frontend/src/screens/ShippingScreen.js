@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
-import { saveShippingAddress } from '../actions/cartAction';
+import { saveShippingAddress } from '../actions/cartActions';
 
 const ShippingScreen = () => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
   const navigate = useNavigate();
+
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
@@ -27,13 +28,13 @@ const ShippingScreen = () => {
   return (
     <FormContainer>
       <CheckoutSteps step1 step2 />
-      <h1>Billing Address</h1>
+      <h1>Shipping</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId='address'>
           <Form.Label>Address</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Enter address'
+            placeholder='Enter Address'
             value={address}
             required
             onChange={(e) => setAddress(e.target.value)}
@@ -49,7 +50,7 @@ const ShippingScreen = () => {
             onChange={(e) => setCity(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Form.Group controlId='postalcode'>
+        <Form.Group controlId='postal code'>
           <Form.Label>Postal Code</Form.Label>
           <Form.Control
             type='text'
@@ -60,17 +61,17 @@ const ShippingScreen = () => {
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId='country'>
-          <Form.Label>Address</Form.Label>
+          <Form.Label>Country</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Enter Counter'
+            placeholder='Enter Country'
             value={country}
             required
             onChange={(e) => setCountry(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary' className='mt-3'>
+        <Button type='submit' className='mt-3' variant='primary'>
           Continue
         </Button>
       </Form>

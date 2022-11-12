@@ -1,23 +1,23 @@
 import axios from 'axios';
 import {
-  SHOP_LIST_FAIL,
-  SHOP_LIST_SUCCESS,
-  SHOP_LIST_REQUEST,
+  SHOP_DETAILS_FAIL,
   SHOP_DETAILS_REQUEST,
   SHOP_DETAILS_SUCCESS,
-  SHOP_DETAILS_FAIL,
+  SHOP_LIST_FAIL,
+  SHOP_LIST_REQUEST,
+  SHOP_LIST_SUCCESS,
+  SHOP_DELETE_FAIL,
   SHOP_DELETE_REQUEST,
   SHOP_DELETE_SUCCESS,
-  SHOP_DELETE_FAIL,
   SHOP_CREATE_REQUEST,
   SHOP_CREATE_SUCCESS,
   SHOP_CREATE_FAIL,
   SHOP_UPDATE_REQUEST,
   SHOP_UPDATE_SUCCESS,
   SHOP_UPDATE_FAIL,
-} from '../constant/shopConstant';
+} from '../constants/shopConstant';
 
-export const listShop = () => async (dispatch) => {
+export const listShops = () => async (dispatch) => {
   try {
     dispatch({ type: SHOP_LIST_REQUEST });
 
@@ -32,7 +32,7 @@ export const listShop = () => async (dispatch) => {
       type: SHOP_LIST_FAIL,
       payload:
         error.response && error.response.data.message
-          ? error.reponse.data.message
+          ? error.response.data.message
           : error.message,
     });
   }
@@ -53,7 +53,7 @@ export const listShopDetails = (id) => async (dispatch) => {
       type: SHOP_DETAILS_FAIL,
       payload:
         error.response && error.response.data.message
-          ? error.reponse.data.message
+          ? error.response.data.message
           : error.message,
     });
   }
@@ -85,8 +85,7 @@ export const deleteShop = (id) => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    if (message === 'Not authorized, token failed') {
-    }
+
     dispatch({
       type: SHOP_DELETE_FAIL,
       payload: message,
@@ -121,6 +120,7 @@ export const createShop = () => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
+
     dispatch({
       type: SHOP_CREATE_FAIL,
       payload: message,
@@ -157,8 +157,7 @@ export const updateShop = (shop) => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    if (message === 'Not authorized, token failed') {
-    }
+
     dispatch({
       type: SHOP_UPDATE_FAIL,
       payload: message,

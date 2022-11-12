@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
 import {
-  getShops,
   getShopById,
+  getShops,
   deleteShop,
   updateShop,
   createShop,
@@ -14,6 +14,6 @@ router
   .route('/:id')
   .get(getShopById)
   .delete(protect, admin, deleteShop)
-  .put(protect, updateShop);
+  .put(protect, admin, updateShop);
 
 export default router;

@@ -1,23 +1,27 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 import { useNavigate } from 'react-router-dom';
 import {
   Row,
   Col,
   Image,
   ListGroup,
-  ListGroupItem,
+  Card,
+  Button,
   Badge,
+  Form,
+  Container,
 } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { listShopDetails, updateShop } from '../actions/shopActions';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
+import { useParams } from 'react-router-dom';
+import { listShopDetails } from '../actions/shopActions';
 
-const ShopScreen = () => {
-  const navigate = useNavigate();
+const ShopScreen = ({ history }) => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
 
   const shopDetails = useSelector((state) => state.shopDetails);
@@ -28,12 +32,12 @@ const ShopScreen = () => {
   }, [id, dispatch]);
 
   const addToCartHandler = () => {
-    navigate(`/cart/${id}?`);
-    //window.location.href = `/cart/${id}`;
+    //history.push(`/cart/${id}?qty=${qty}`);
+    navigate(`/cart/${id}?qty=${qty}`);
   };
 
   return (
-    <>
+    <Container>
       <Link className='btn btn-light my-3' to='/'>
         Go Back
       </Link>
@@ -43,43 +47,41 @@ const ShopScreen = () => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
-          <Col md={6}>
-            <Image src={shop.image} alt={shop.name} fluid />
+          <Col md={4}>
+            <Image src={shop.image} alt={shop.name} flush />
           </Col>
-          <Col md={6}>
+
+          <Col md={4}>
             <ListGroup variant='flush'>
               <ListGroup.Item>
-                <h3>
-                  {shop.name}{' '}
-                  <span
-                    style={{
-                      color: '#6A44BB',
-                      fontSize: '17px',
-                    }}
-                  >
-                    ({shop._id})
-                  </span>
-                </h3>
+                <h3>{shop.name}</h3>
               </ListGroup.Item>
               <ListGroup.Item>
-                Owner:<strong> {shop.owner_name}</strong>
+                <strong>Owner:</strong> {shop.owner_name}
               </ListGroup.Item>
-              <ListGroupItem>
-                Owner mobile No.: <strong> {shop.owner_mobile}</strong>
-              </ListGroupItem>
+              <ListGroup.Item>
+                <strong>Owner mobile No.:</strong> {shop.owner_mobile}
+              </ListGroup.Item>
 
-              <ListGroup.Item>Category: {shop.category}</ListGroup.Item>
-              <ListGroup.Item>Email: {shop.email}</ListGroup.Item>
-              <ListGroup.Item>Mobile No.: {shop.mobile}</ListGroup.Item>
-              <ListGroup.Item>Address: {shop.address}</ListGroup.Item>
               <ListGroup.Item>
-                Shop Added By (Executive):{' '}
+                <strong>Category:</strong> {shop.category}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <strong>Email:</strong> {shop.email}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <strong>Mobile No.:</strong> {shop.mobile}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <strong>Address:</strong> {shop.address}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <strong>Shop Added By (Executive): </strong>{' '}
                 <Badge pill bg='info'>
                   {shop.exename}
                 </Badge>{' '}
               </ListGroup.Item>
             </ListGroup>
-
             <h6
               style={{
                 color: 'red',
@@ -87,7 +89,7 @@ const ShopScreen = () => {
                 textDecoration: 'underline',
               }}
             >
-              Required Documents of the Registered Shop *
+              Required Documents of the Registered Shop*
             </h6>
 
             <Col md>
@@ -95,8 +97,8 @@ const ShopScreen = () => {
               <Image src={shop.trade_lic} alt='Trade Lic' fluid />
             </Col>
             <Col md>
-              <strong>MISE Certificates :</strong>
-              <Image src={shop.MISE_certificates} alt='MISE' fluid />
+              <strong>MSME Certificates :</strong>
+              <Image src={shop.MISE_certificates} alt='MSME' fluid />
             </Col>
             <Col md>
               <strong>Pan Card :</strong>
@@ -120,9 +122,53 @@ const ShopScreen = () => {
               </ListGroup>
             </Col>
           </Col>
+          <Col md={4}>
+            <Card>
+              <ListGroup variant='flush'>
+                {/* <ListGroup.Item>
+                <Row>
+                  <Col>Price:</Col>
+                  <Col>
+                    <strong>${shop.price}</strong>
+                  </Col>
+                </Row>
+              </ListGroup.Item> */}
+                {shop.countInStock > 0 && (
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Qty</Col>
+                      <Col>
+                        <Form.Control
+                          as='select'
+                          value={qty}
+                          onChange={(e) => setQty(e.target.value)}
+                        >
+                          {[...Array(shop.countInStock).keys()].map((x) => (
+                            <option key={x + 1} value={x + 1}>
+                              {x + 1}
+                            </option>
+                          ))}
+                        </Form.Control>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
+                )}
+                <ListGroup.Item>
+                  <Button
+                    className='btn-block'
+                    type='button'
+                    onClick={addToCartHandler}
+                    disabled={shop.countInStock === 0}
+                  >
+                    Pay to Bazaar
+                  </Button>
+                </ListGroup.Item>
+              </ListGroup>
+            </Card>
+          </Col>
         </Row>
       )}
-    </>
+    </Container>
   );
 };
 

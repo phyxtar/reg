@@ -64,9 +64,8 @@ const RegisterScreen = () => {
             className='my-5 display-3 fw-bold ls-tight px-3'
             style={{ color: 'hsl(218, 81%, 95%)' }}
           >
-            <span style={{ color: 'hsl(218, 81%, 75%)' }}>
-              Looks like you're new here!
-            </span>
+            Looks like you <br />
+            <span style={{ color: 'hsl(218, 81%, 75%)' }}>'re new here!!!</span>
           </h1>
 
           <p

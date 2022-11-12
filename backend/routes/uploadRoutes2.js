@@ -34,7 +34,7 @@ const upload2 = multer({
   },
 });
 
-router.post('/', upload2.single('trade_lic'), (req, res) => {
+router.post('/', upload2.single('pan_card'), (req, res) => {
   res.send(`/${req.file.path}`);
 });
 

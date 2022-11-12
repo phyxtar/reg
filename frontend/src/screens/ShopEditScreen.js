@@ -1,13 +1,12 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { Form } from 'react-bootstrap';
+import { Form, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { listShopDetails, updateShop } from '../actions/shopActions';
-import { useParams } from 'react-router-dom';
 
 import {
   MDBBtn,
@@ -17,14 +16,18 @@ import {
   MDBCard,
   MDBCardBody,
   MDBInput,
-  MDBFile,
+  MDBIcon,
   MDBCheckbox,
+  MDBFile,
 } from 'mdb-react-ui-kit';
-import { SHOP_UPDATE_RESET } from '../constant/shopConstant';
+import { useParams } from 'react-router-dom';
+import { SHOP_UPDATE_RESET } from '../constants/shopConstant';
 
 const ShopEditScreen = () => {
   const { id } = useParams();
+  const shopId = id;
 
+  const [qty, setQty] = useState(1);
   const [name, setName] = useState('');
   const [image, setImage] = useState('');
   const [category, setCategory] = useState('');
@@ -35,23 +38,19 @@ const ShopEditScreen = () => {
   const [owner_mobile, setOwnerMobile] = useState('');
   const [exename, setExename] = useState('');
   const [price, setPrice] = useState('');
-  const [price2, setPrice2] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [uploading1, setUploading1] = useState(false);
   const [uploading2, setUploading2] = useState(false);
   const [uploading3, setUploading3] = useState(false);
-  const [uploading4, setUploading4] = useState(false);
-  //const [uploading5, setUploading5] = useState(false);
   const [trade_lic, setTradeLic] = useState('');
   const [pan_card, setPanCard] = useState('');
   const [MISE_certificates, setMise] = useState('');
   const [account_number, setAccount] = useState('');
   const [bank_name, setBankname] = useState('');
   const [ifcs_number, setIfcs] = useState('');
-  const [isPaid, setIspaid] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const shopId = id;
 
   const shopDetails = useSelector((state) => state.shopDetails);
   const { loading, error, shop } = shopDetails;
@@ -66,8 +65,7 @@ const ShopEditScreen = () => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: SHOP_UPDATE_RESET });
-      //navigate('/admin/shoplist');
-      navigate(`/welcome/shop/${shop._id}/edit`);
+      navigate('/admin/shoplist');
     } else {
       if (!shop.name || shop._id !== shopId) {
         dispatch(listShopDetails(shopId));
@@ -88,11 +86,9 @@ const ShopEditScreen = () => {
         setIfcs(shop.ifcs_number);
         setExename(shop.exename);
         setPrice(shop.price);
-        setPrice2(shop.price2);
-        setIspaid(shop.isPaid);
       }
     }
-  }, [shop, shopId, dispatch, navigate, successUpdate]);
+  }, [dispatch, shopId, shop, successUpdate]);
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
@@ -102,7 +98,7 @@ const ShopEditScreen = () => {
 
     try {
       const config = {
-        header: {
+        headers: {
           'Content-Type': 'multipart/form-data',
         },
       };
@@ -113,14 +109,37 @@ const ShopEditScreen = () => {
       setUploading(false);
     } catch (error) {
       console.error(error);
-      setUploading();
+      setUploading(false);
+    }
+  };
+
+  const uploadFileHandler1 = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('trade_lic', file);
+    setUploading1(true);
+
+    try {
+      const config = {
+        header: {
+          'Content-Type': 'multipart/form-data',
+        },
+      };
+
+      const { data } = await axios.post('/api/upload1', formData, config);
+
+      setTradeLic(data);
+      setUploading1(false);
+    } catch (error) {
+      console.error(error);
+      setUploading1();
     }
   };
 
   const uploadFileHandler2 = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
-    formData.append('trade_lic', file);
+    formData.append('pan_card', file);
     setUploading2(true);
 
     try {
@@ -132,7 +151,7 @@ const ShopEditScreen = () => {
 
       const { data } = await axios.post('/api/upload2', formData, config);
 
-      setTradeLic(data);
+      setPanCard(data);
       setUploading2(false);
     } catch (error) {
       console.error(error);
@@ -143,7 +162,7 @@ const ShopEditScreen = () => {
   const uploadFileHandler3 = async (e) => {
     const file = e.target.files[0];
     const formData = new FormData();
-    formData.append('pan_card', file);
+    formData.append('MISE_certificates', file);
     setUploading3(true);
 
     try {
@@ -155,59 +174,13 @@ const ShopEditScreen = () => {
 
       const { data } = await axios.post('/api/upload3', formData, config);
 
-      setPanCard(data);
+      setMise(data);
       setUploading3(false);
     } catch (error) {
       console.error(error);
       setUploading3();
     }
   };
-
-  const uploadFileHandler4 = async (e) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('MISE_certificates', file);
-    setUploading4(true);
-
-    try {
-      const config = {
-        header: {
-          'Content-Type': 'multipart/form-data',
-        },
-      };
-
-      const { data } = await axios.post('/api/upload4', formData, config);
-
-      setMise(data);
-      setUploading4(false);
-    } catch (error) {
-      console.error(error);
-      setUploading4();
-    }
-  };
-
-  // const uploadFileHandler5 = async (e) => {
-  //   const file = e.target.files[0];
-  //   const formData = new FormData();
-  //   formData.append('bank_details', file);
-  //   setUploading5(true);
-
-  //   try {
-  //     const config = {
-  //       header: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //     };
-
-  //     const { data } = await axios.post('/api/upload5', formData, config);
-
-  //     setBank(data);
-  //     setUploading5(false);
-  //   } catch (error) {
-  //     console.error(error);
-  //     setUploading5();
-  //   }
-  // };
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -230,22 +203,20 @@ const ShopEditScreen = () => {
         ifcs_number,
         exename,
         price,
-        price2,
-        isPaid,
       })
     );
-    //navigate(`/shop/${shop._id}`);
+    navigate(`/cart/${id}?qty=${qty}`);
   };
 
   return (
     <>
-      <Link to='/admin/shoplist' className='btn btn-light my-3'>
-        Go Back
-      </Link>
       <MDBContainer
         fluid
         className='p-4 background-radial-gradient overflow-hidden'
       >
+        <Link to='/admin/shoplist' clasName='btn btn-light my-3'>
+          Go Back
+        </Link>
         <MDBRow>
           <MDBCol
             md='6'
@@ -255,9 +226,20 @@ const ShopEditScreen = () => {
               className='my-5 display-3 fw-bold ls-tight px-3'
               style={{ color: 'hsl(218, 81%, 95%)' }}
             >
-              Edit <br />
-              <span style={{ color: 'hsl(218, 81%, 75%)' }}>Shop</span>
+              Edit Registered
+              <br />
+              <span style={{ color: 'hsl(218, 81%, 75%)' }}>
+                Shop's Details
+              </span>
             </h1>
+
+            <p
+              className='px-3 mb-5'
+              style={{ color: 'hsl(218, 81%, 85%)', fontSize: '20px' }}
+            >
+              Join our group in few minutes! Sign up with your details to get
+              started...☺
+            </p>
           </MDBCol>
 
           <MDBCol md='6' className='position-relative'>
@@ -279,19 +261,11 @@ const ShopEditScreen = () => {
               <Form onSubmit={submitHandler}>
                 <MDBCard className='my-5 bg-glass'>
                   <MDBCardBody className='p-5'>
-                    {/* <MDBCheckbox
-                      wrapperClass='mb-4'
-                      id='form3'
-                      label='is Paid ?'
-                      type='checkbox'
-                      checked={isPaid}
-                      onChange={(e) => setIspaid(e.target.checked)}
-                    /> */}
                     <MDBInput
                       wrapperClass='mb-4'
                       id='form2'
                       type='text'
-                      placeholder='Enter Your Name'
+                      placeholder='Enter Name'
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       required
@@ -300,7 +274,7 @@ const ShopEditScreen = () => {
                       wrapperClass='mb-4'
                       id='form2'
                       type='text'
-                      placeholder='Enter image url'
+                      placeholder='Enter Shop image url'
                       value={image}
                       onChange={(e) => setImage(e.target.value)}
                     />
@@ -376,23 +350,13 @@ const ShopEditScreen = () => {
                       required
                     />
                     <MDBInput
-                      label='Starter plan'
+                      label='Starter plan (199) + Monthly Services Plan & Fees(Worth Rs. 999 Only)'
                       wrapperClass='mb-4'
                       id='form3'
                       type='number'
                       placeholder='Starter Plan'
                       value={price}
                       onChange={(e) => setPrice(e.target.value)}
-                      required
-                    />
-                    <MDBInput
-                      label='Digital Marketing plan'
-                      wrapperClass='mb-4'
-                      id='form3'
-                      type='number'
-                      placeholder='Degital Marketing Plan'
-                      value={price2}
-                      onChange={(e) => setPrice2(e.target.value)}
                       required
                     />
                     <strong>
@@ -417,9 +381,9 @@ const ShopEditScreen = () => {
                       id='customFile'
                       label='OR Upload Image'
                       custom
-                      onChange={uploadFileHandler2}
+                      onChange={uploadFileHandler1}
                     />
-                    {uploading2 && <Loader />}
+                    {uploading1 && <Loader />}
                     <hr />
                     <hr />
                     <p style={{ fontWeight: 700, color: 'red' }}>PAN Card : </p>
@@ -436,9 +400,9 @@ const ShopEditScreen = () => {
                       id='customFile'
                       label='OR Upload Image'
                       custom
-                      onChange={uploadFileHandler3}
+                      onChange={uploadFileHandler2}
                     />
-                    {uploading3 && <Loader />}
+                    {uploading2 && <Loader />}
                     <hr />
                     <hr />
                     <p style={{ fontWeight: 700, color: 'red' }}>
@@ -457,9 +421,9 @@ const ShopEditScreen = () => {
                       id='customFile'
                       label='OR Upload Image'
                       custom
-                      onChange={uploadFileHandler4}
+                      onChange={uploadFileHandler3}
                     />
-                    {uploading4 && <Loader />}
+                    {uploading3 && <Loader />}
                     <hr />
                     <hr />
                     <p style={{ fontWeight: 700, color: 'red' }}>

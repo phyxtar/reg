@@ -40,15 +40,12 @@ const shopSchema = mongoose.Schema(
     },
     trade_lic: {
       type: String,
-      required: true,
     },
     pan_card: {
       type: String,
-      required: true,
     },
-    MISE_certificates: {
+    MESE_certificates: {
       type: String,
-      required: true,
     },
     bank_name: {
       type: String,
@@ -77,15 +74,20 @@ const shopSchema = mongoose.Schema(
       required: true,
       default: 698,
     },
-    isPaid: {
-      type: Boolean,
-      default: false,
+    countInStock: {
+      type: Number,
       required: true,
+      default: 1,
     },
-    isApproved: {
-      type: Boolean,
-      default: false,
-    },
+    // isPaid: {
+    //   type: Boolean,
+    //   default: false,
+    //   required: true,
+    // },
+    // isApproved: {
+    //   type: Boolean,
+    //   default: false,
+    // },
   },
   {
     timestamps: true,

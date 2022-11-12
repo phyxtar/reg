@@ -5,8 +5,8 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { Table, Button, Container, Badge, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { listShop, deleteShop, createShop } from '../actions/shopActions';
-import { SHOP_CREATE_RESET } from '../constant/shopConstant';
+import { listShops, deleteShop, createShop } from '../actions/shopActions';
+import { SHOP_CREATE_RESET } from '../constants/shopConstant';
 
 const HomeScreen = () => {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ const HomeScreen = () => {
     if (successCreate) {
       navigate(`/admin/shop/${createdShop._id}/edit`);
     } else {
-      dispatch(listShop());
+      dispatch(listShops());
     }
   }, [dispatch, navigate, userInfo, successDelete, successCreate, createdShop]);
 
