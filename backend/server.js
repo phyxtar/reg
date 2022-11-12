@@ -55,12 +55,8 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(
-  5000,
-  console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow.bold
-  )
-);
+app.listen(port, '0.0.0.0', console.log('Listening on Port 3000'));
+
 // initializee Razorpay crededntials
 
 const razorpay = new Razorpay({
