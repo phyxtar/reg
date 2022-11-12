@@ -2,21 +2,21 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-// import HomeScreen from './Screens/HomeScreen';
-import ShopScreen from './Screens/ShopScreen';
-import CartScreen from './Screens/CartScreen';
-import LoginScreen from './Screens/LoginScreen';
-import RegisterScreen from './Screens/RegisterScreen';
-import ProfileScreen from './Screens/ProfileScreen';
-import ShippingScreen from './Screens/ShippingScreen';
-import PaymentScreen from './Screens/PaymentScreen';
-import PlaceOrderScreen from './Screens/PlaceOrderScreen';
-import OrderScreen from './Screens/OrderScreen';
-import UserListScreen from './Screens/UserListScreen';
-import UserEditScreen from './Screens/UserEditScreen';
-import ShopListScreen from './Screens/ShopListScreen';
-import ShopEditScreen from './Screens/ShopEditScreen';
-import OrderListScreen from './Screens/OrderListScreen';
+import HomeScreen from './screens/HomeScreen';
+import ShopScreen from './screens/ShopScreen';
+import CartScreen from './screens/CartScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import ProfileScreen from './screens/ProfileScreen';
+import ShippingScreen from './screens/ShippingScreen';
+import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
+import OrderScreen from './screens/OrderScreen';
+import UserListScreen from './screens/UserListScreen';
+import UserEditScreen from './screens/UserEditScreen';
+import ShopListScreen from './screens/ShopListScreen';
+import ShopEditScreen from './screens/ShopEditScreen';
+import OrderListScreen from './screens/OrderListScreen';
 
 const App = () => {
   return (
@@ -24,7 +24,7 @@ const App = () => {
       <Header />
       <main className='py-3'>
         <Routes>
-          {/* <Route path='/' element={<HomeScreen />} exact /> */}
+          <Route path='/' element={<HomeScreen />} exact />
           <Route path='/shop/:id' element={<ShopScreen />} exact />
           <Route path='/cart/:id' element={<CartScreen />} exact />
           <Route path='/cart' element={<CartScreen />} exact />
