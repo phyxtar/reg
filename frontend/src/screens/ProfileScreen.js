@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Row, Col, Container } from 'react-bootstrap';
+import { Form, Button, Row, Col, Container, Table, Nav } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { useNavigate } from 'react-router-dom';
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstant';
+import { listMyOrders } from '../actions/orderActions';
 
 const ProfileScreen = () => {
   const navigate = useNavigate();
@@ -26,6 +28,9 @@ const ProfileScreen = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const orderListMy = useSelector((state) => state.orderListMy);
+  const { loading: loadingOrders, error: errorOrders, orders } = orderListMy;
+
   useEffect(() => {
     if (!userInfo) {
       navigate('/login');
@@ -33,6 +38,7 @@ const ProfileScreen = () => {
       if (!user || !user.name || success) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails('profile'));
+        dispatch(listMyOrders());
       } else {
         setName(user.name);
         setEmail(user.email);
@@ -55,7 +61,6 @@ const ProfileScreen = () => {
         <Col md={3}>
           <h2>User Profile</h2>
           {message && <Message variant='danger'>{message}</Message>}
-          {}
           {success && <Message variant='success'>Profile Updated</Message>}
           {loading ? (
             <Loader />
@@ -111,6 +116,58 @@ const ProfileScreen = () => {
         </Col>
         <Col md={9}>
           <h2>My Registered Shops</h2>
+          {loadingOrders ? (
+            <Loader />
+          ) : errorOrders ? (
+            <Message variant='danger'>{errorOrders}</Message>
+          ) : (
+            <Table striped bordered hover responsive className='table-sm'>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>DATE</th>
+                  <th>TOTAL</th>
+                  <th>PAID</th>
+                  <th>APPROVED</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map((order) => (
+                  <tr key={order._id}>
+                    <td>{order._id}</td>
+                    <td>{new Date(order.createdAt).toDateString()}</td>
+                    <td>{order.totalPrice}</td>
+                    <td>
+                      {order.isPaid ? (
+                        new Date(order.createdAt).toDateString()
+                      ) : (
+                        <i
+                          className='fas fa-times'
+                          style={{ color: 'red' }}
+                        ></i>
+                      )}
+                    </td>
+                    <td>
+                      {order.isDelivered ? (
+                        new Date(order.createdAt).toDateString()
+                      ) : (
+                        <i
+                          className='fas fa-times'
+                          style={{ color: 'red' }}
+                        ></i>
+                      )}
+                    </td>
+                    <td>
+                      <Nav.Link as={Link} to={`/order/${order._id}`}>
+                        <Button variant='light'>Details</Button>
+                      </Nav.Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
         </Col>
       </Row>
     </Container>
