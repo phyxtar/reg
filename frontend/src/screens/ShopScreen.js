@@ -47,11 +47,13 @@ const ShopScreen = ({ history }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
-          <Col md={4}>
-            <Image src={shop.image} alt={shop.name} flush />
+          <Col md={6}>
+            <Card>
+              <Image src={shop.image} alt={shop.name} flush responsive />
+            </Card>
           </Col>
 
-          <Col md={4}>
+          <Col md={6}>
             <ListGroup variant='flush'>
               <ListGroup.Item>
                 <h3>{shop.name}</h3>
@@ -121,50 +123,6 @@ const ShopScreen = ({ history }) => {
                 </ListGroup.Item>
               </ListGroup>
             </Col>
-          </Col>
-          <Col md={4}>
-            <Card>
-              <ListGroup variant='flush'>
-                {/* <ListGroup.Item>
-                <Row>
-                  <Col>Price:</Col>
-                  <Col>
-                    <strong>${shop.price}</strong>
-                  </Col>
-                </Row>
-              </ListGroup.Item> */}
-                {shop.countInStock > 0 && (
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Qty</Col>
-                      <Col>
-                        <Form.Control
-                          as='select'
-                          value={qty}
-                          onChange={(e) => setQty(e.target.value)}
-                        >
-                          {[...Array(shop.countInStock).keys()].map((x) => (
-                            <option key={x + 1} value={x + 1}>
-                              {x + 1}
-                            </option>
-                          ))}
-                        </Form.Control>
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-                )}
-                <ListGroup.Item>
-                  <Button
-                    className='btn-block'
-                    type='button'
-                    onClick={addToCartHandler}
-                    disabled={shop.countInStock === 0}
-                  >
-                    Pay to Bazaar
-                  </Button>
-                </ListGroup.Item>
-              </ListGroup>
-            </Card>
           </Col>
         </Row>
       )}

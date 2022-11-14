@@ -9,6 +9,18 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;       /* roundness of the scroll thumb */
 }
 
+body {
+  cursor: url(./img/ico.png), pointer;
+}
+
+a {
+  cursor: url(./img/icon.png), pointer !important;
+}
+
+button{
+  cursor: url(./img/icon.png), pointer !important;
+}
+
 main {
     min-height: 80vh;
   }
