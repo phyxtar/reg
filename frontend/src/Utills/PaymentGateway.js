@@ -1,7 +1,9 @@
+import axios from 'axios';
+
 export default async function displayRazorPay() {
   // simple post thr node.js server
 
-  const data = await fetch('http://localhost:5000/razorpay', {
+  const data = await fetch('/razorpay', {
     method: 'POST',
   }).then((t) => t.json());
 

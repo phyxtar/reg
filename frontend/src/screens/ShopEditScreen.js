@@ -360,7 +360,7 @@ const ShopEditScreen = () => {
                       required
                     />
                     <strong>
-                      The below document is required for become a member od
+                      The below document is required for become a member of
                       Bazaar.com
                     </strong>{' '}
                     <br />

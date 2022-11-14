@@ -38,27 +38,7 @@ app.use('/api/upload3', uploadRoutes3);
 //   res.send(process.env.RAZORPAY_ID)
 // );
 
-const __dirname = path.resolve();
-app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '/frontend/build')));
-
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
-  );
-} else {
-  app.get('/', (req, res) => {
-    res.send('API is Runing...');
-  });
-}
-
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, '0.0.0.0', console.log('Listening on Port 3000'));
-
 // initializee Razorpay crededntials
-
 const razorpay = new Razorpay({
   key_id: 'rzp_test_zMS9I7prWhZhsi',
   key_secret: 'xhDMc4fMjcjZpvFC1hm5lMSm',
@@ -89,6 +69,25 @@ app.post('/razorpay', async (req, res) => {
   }
 });
 
+const __dirname = path.resolve();
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  );
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is Runing...');
+  });
+}
+
 app.use(notFound);
 
 app.use(errorHandler);
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, '0.0.0.0', console.log('Listening on Port 3000'));
