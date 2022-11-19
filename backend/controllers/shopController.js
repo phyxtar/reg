@@ -31,7 +31,7 @@ const deleteShop = asyncHandler(async (req, res) => {
 
 const createShop = asyncHandler(async (req, res) => {
   const shop = new Shop({
-    name: 'Sample name',
+    name: 'Sample Shop name',
     image: '/images/sample.jpg',
     category: 'Sample category',
     email: 'Sample Email',
