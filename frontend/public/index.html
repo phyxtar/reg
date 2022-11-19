@@ -16,10 +16,45 @@
     <title>Vendor Registration</title>
   </head>
   <body>
+    <style>
+      .preloader {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+    </style>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root">
+      <img src="./images/cart.gif" class="preloader">
+    </div>
 
     
-    
+    <script>
+      //Prevent copy paste via HTML attributes
+var body = document.body;
+body.setAttribute("oncopy","return false");
+body.setAttribute("oncut","return false");
+body.setAttribute("onpaste","return false");
+
+
+//This prevents the action of right clicking
+//This is now pointless after what I implemented above
+var preventRightClick = window.addEventListener("contextmenu",function(e) {
+  e.preventDefault();
+  alert("Not allowed to right click, sorry");
+});
+
+//This prevents the Ctrl+C keyboard shortcut...
+//Umm...ok...No it doesn't :-/
+var preventCtrlC = window.addEventListener("keypress",function(e) {
+  var str;
+  for (i in e) {
+    str = str + i + ": " + e[i] + "<br />";
+  }
+  document.getElementById("innerContainer").innerHTML = str;
+});
+    </script>
   </body>
 </html>
